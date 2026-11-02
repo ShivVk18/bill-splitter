@@ -155,6 +155,27 @@ You must understand every line you submit. We check this with your video and in 
 5. Paste the repository link and the video link in the application form.
 
 We will run `pnpm install && pnpm check && pnpm typecheck && pnpm test` on your repository.
-# bill-splitter
 
-# bill-splitter
+## Decisions
+
+#1. Modular backend architecture
+Decision: Used Hono routers, controllers, and services to organise the backend.
+
+Why: Separates routing, HTTP request/response handling, and business logic. This makes the application easier to maintain, test, and extend.
+
+Trade-off: Adds more files and initial boilerplate compared to writing everything in a single file.
+
+#2. Store monetary values as integer cents
+Decision: Store all bill amounts and shares as integers in cents instead of floating-point values.
+
+Why: Avoids floating-point precision errors when splitting bills and calculating balances.
+
+Trade-off: Requires converting amounts between rupees and paise at the UI/API boundary.
+
+#3. Idempotent and concurrency-safe payments
+Decision: Use idempotency keys and conditional database updates when marking a share as paid.
+
+Why: Prevents duplicate payments when requests are retried and protects against multiple concurrent payment attempts for the same share.
+
+Trade-off: Requires additional database logic and handling of conflicting requests.
+

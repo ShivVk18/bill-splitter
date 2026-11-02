@@ -8,7 +8,7 @@ export function Header() {
         justifyContent: 'space-between',
       }}>
         <div className="brand">
-          Split<span>Mate.</span>
+          House<span>Split.</span>
         </div>
         <div className="topbar-tag">SHARED EXPENSES, SIMPLIFIED</div>
       </div>
